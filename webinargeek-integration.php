@@ -94,5 +94,9 @@ function webinargeek_deactivate() {
 
 }
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-sync.php';
+$sync = new WebinarGeek_Sync();
+add_action('admin_init', array($sync, 'register_jet_meta_fields'));
+
 $sync = new WebinarGeek_Sync();
 add_action('admin_init', array($sync, 'register_jet_meta_fields'));
