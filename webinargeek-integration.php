@@ -91,4 +91,8 @@ function webinargeek_deactivate() {
     } catch (Exception $e) {
         error_log('WebinarGeek Integration deactivation error: ' . $e->getMessage());
     }
+
 }
+
+$sync = new WebinarGeek_Sync();
+add_action('admin_init', array($sync, 'register_jet_meta_fields'));

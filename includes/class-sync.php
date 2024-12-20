@@ -163,15 +163,22 @@ class WebinarGeek_Sync {
     }
     
     public function register_jet_meta_fields() {
-        add_meta_box(
-            'webinargeek_details',
-            __('WebinarGeek Details', 'webinargeek-integration'),
-            array($this, 'render_meta_box'),
-            $this->post_type,
-            'normal',
-            'high'
-        );
+        add_action( 'add_meta_boxes', array( $this, 'add_jet_meta_boxes' ) );
     }
+
+    public function add_jet_meta_boxes( $post_type ) {
+        if ( 'webinargeek' === $post_type ) { // Controleer of het het juiste post type is
+            add_meta_box(
+                'jet_meta_box',
+                __( 'Jet Meta Box', 'webinargeeks' ),
+                array( $this, 'jet_meta_box_callback' ),
+                $post_type,
+                'normal',
+                'default'
+            );
+        }
+    }
+    
 
     public function render_meta_box($post) {
         $fields = array(
